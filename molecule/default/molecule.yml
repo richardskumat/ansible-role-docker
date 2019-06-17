@@ -1,0 +1,27 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: debian_9
+    image: debian:stretch-backports
+    pull: yes
+    groups:
+     - docker
+provisioner:
+  name: ansible
+  log: true
+  inventory:
+    group_vars:
+      docker:
+        user: qwe
+        username: qwe
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

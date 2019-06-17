@@ -1,0 +1,3 @@
+---
+docker_remote_ip: "{{ ansible_default_ipv4.address }}"
+docker_remote_port: 2375

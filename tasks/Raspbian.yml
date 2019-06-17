@@ -1,0 +1,113 @@
+---
+- name: Remove older versions of Docker(including those in main debian repos)
+  apt:
+    name: "{{ packages }}"
+    state: absent
+  vars:
+   packages:
+   - docker
+   - docker-engine
+   - docker.io
+   - containerd
+   - runc
+
+- name: Update apt
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Install needed packages for Docker
+  apt:
+    name: "{{ packages }}"
+    install_recommends: no
+  vars:
+   packages:
+   - apt-transport-https
+   - ca-certificates
+   - curl
+   - gnupg2
+   - software-properties-common
+
+- name: Add docker's apt key
+  apt_key:
+    url: 'https://download.docker.com/linux/raspbian/gpg'
+    state: present
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+- name: Setup the docker apt repo
+  lineinfile:
+    line: 'deb [arch=armhf] https://download.docker.com/linux/raspbian {{ ansible_distribution_release }} stable'
+    path: /etc/apt/sources.list.d/docker-ce.list
+    create: yes
+    owner: root
+    group: root
+    mode: 0644
+    state: present
+
+- name: Install docker packages for {{ ansible_lsb.id }} 9
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    install_recommends: no
+  vars:
+   packages:
+   - docker-ce
+   - docker-ce-cli
+   - containerd.io
+   # python docker is req for ansible for mod ansible_docker
+   - python-docker
+  when: ansible_lsb.id == 'Raspbian' and ansible_lsb.major_release == '9' 
+  notify: "restart docker"
+
+- name: Install docker packages for {{ ansible_lsb.id }} 8
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    install_recommends: no
+  vars:
+   packages:
+   - docker-ce
+   #- docker-ce-cli
+   #- containerd.io
+   # python docker is req for ansible for mod ansible_docker
+   - python-docker
+  when: ansible_lsb.id == 'Raspbian' and ansible_lsb.major_release == '8' 
+  notify: "restart docker"   
+
+- name: Run docker hello world!
+  docker_container:
+   name: hello-world
+   image: hello-world
+
+- name: Add my user to docker
+  user:
+  # this requires the use of the role user
+  # 
+   name: "{{ username }}"
+   comment: user
+# this is optional
+# but conflicts with some cloud images
+# eg ovh, digitalocean has debian users with uid 1000
+#   uid: "{{ uid }}"
+   groups: docker
+   append: yes
+   state: present
+
+   
+
+#- name: Create /etc/systemd/system/docker.service.d
+#  file:
+#    path: /etc/systemd/system/docker.service.d
+#    state: directory
+#    mode: 0755
+    
+#- name: Enable remote access
+  #template:
+    #src: templates/override.conf.j2
+    #dest: /etc/systemd/system/docker.service.d/override.conf
+    #owner: root
+    #group: root
+    #mode: 0644
+
+#- name: Reload systemctl daemon
+#  command: systemctl daemon-reload
