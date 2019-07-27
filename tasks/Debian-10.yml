@@ -70,15 +70,6 @@
    append: yes
    state: present
 
-- name: Install backported docker compose
-  apt:
-    name: "{{ packages }}"
-    update_cache: yes
-    default_release: "{{ ansible_distribution_release }}-backports"
-  vars:
-   packages:
-   - docker-compose
-
 #- name: Create /etc/systemd/system/docker.service.d
   #file:
     #path: /etc/systemd/system/docker.service.d
