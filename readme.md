@@ -19,7 +19,7 @@ docker_remote_ip: "{{ ansible_default_ipv4.address }}"
 
 Unused var at the moment, but there commented out tasks that would
 set up remote access to the docker daemon in the Debian tasks,
-but since I don't docker over http/s these are commented out.
+but since I don't use docker over http/s these are commented out.
 
 docker_remote_port: 2375
 
