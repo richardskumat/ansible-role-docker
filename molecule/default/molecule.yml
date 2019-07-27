@@ -6,8 +6,8 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: debian_9
-    image: debian:stretch-backports
+  - name: instance
+    image: "${MOLECULE_DISTRO:-debian:stretch-backports}"
     pull: yes
     groups:
      - docker

@@ -23,7 +23,7 @@ before_script:
 test_d9:
   stage: test
   variables:
-    MOLECULE_DISTRO: "debian:9"
+    MOLECULE_DISTRO: "debian:stretch-backports"
   script:
     - molecule converge || true
     - molecule test || true
