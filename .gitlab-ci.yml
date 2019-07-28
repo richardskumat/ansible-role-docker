@@ -11,6 +11,8 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   ROLE_NAME: ansible-role-docker
   GALAXY_USERNAME: richardskumat
+  GALAXY_ROLENAME: ansible_role_docker
+
 
 services:
   - docker:dind
@@ -23,13 +25,13 @@ before_script:
   - ansible --version
   - molecule --version
   - cd ..
-  - cp -aR $ROLE_NAME $GALAXY_USERNAME.$ROLE_NAME
-  - cd $GALAXY_USERNAME.$ROLE_NAME
+  - cp -aR $ROLE_NAME $GALAXY_USERNAME.$GALAXY_ROLENAME
+  - cd $GALAXY_USERNAME.$GALAXY_ROLENAME
 
 test_d9:
   stage: test
   variables:
-    MOLECULE_DISTRO: "debian:stretch-backports"
+    MOLECULE_DISTRO: "debian:9"
   script:
     - molecule converge || true
     - molecule test || true

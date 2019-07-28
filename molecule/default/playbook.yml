@@ -3,4 +3,4 @@
   hosts: all
 
   roles:
-    - role: richardskumat.ansible-role-docker
+    - role: richardskumat.ansible_role_docker
