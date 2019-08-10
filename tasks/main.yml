@@ -1,6 +1,6 @@
 ---
 
-#- name: Include overrides specific to Centos 7.
+# - name: Include overrides specific to Centos 7.
 #  include_tasks: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
 #  when:
 #    - ansible_distribution == 'CentOS'
