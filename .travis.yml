@@ -9,8 +9,8 @@ env:
     - GALAXY_USERNAME: richardskumat
     - GALAXY_ROLENAME: ansible_role_docker
   matrix:
-    - MOLECULE_DISTRO: debian:9
-    - MOLECULE_DISTRO: debian:10
+    - MOLECULE_DISTRO: debian:stretch-backports
+    - MOLECULE_DISTRO: debian:buster-backports
 
 install:
   # Install test dependencies.
