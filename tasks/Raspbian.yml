@@ -50,20 +50,7 @@
     update_cache: 'yes'
     install_recommends: 'no'
   notify: "restart docker"
-  when: ansible_lsb.id == 'Raspbian' and ansible_lsb.major_release == '9'
-
-- name: Install docker packages for {{ ansible_lsb.id }} {{ ansible_distribution_major_version }}
-  apt:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      # python docker is req for ansible for mod ansible_docker
-      - python-docker
-    update_cache: 'yes'
-    install_recommends: 'no'
-  notify: "restart docker"
-  when: ansible_lsb.id == 'Raspbian' and ansible_lsb.major_release == '8'
+  when: ansible_lsb.id == 'Raspbian'
 
 - name: Add my user to docker
   user:
