@@ -9,7 +9,7 @@ lint:
     config-file: molecule/default/yaml-lint.yml
 platforms:
   - name: instance
-    image: "${MOLECULE_DISTRO:-debian:stretch-backports}"
+    image: "${MOLECULE_DISTRO:-debian:buster}"
     pull: true
     groups:
       - docker
