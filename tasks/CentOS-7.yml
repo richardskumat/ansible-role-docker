@@ -1,0 +1,40 @@
+---
+
+# installation instructions https://docs.docker.com/install/linux/docker-ce/centos/
+
+- name: Remove old packages called docker or docker-engine
+  yum:
+   name:
+    - docker
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-engine
+   state: absent
+
+- name: Install required packages to add the Docker-CE repo
+  yum:
+   name:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+   state: present
+
+- name: Add the Docker-CE repo for Centos 7
+  get_url:
+   url: "{{ docker_centos_repo_baseurl }}"
+   dest: /etc/yum.repos.d/docker-ce.repo
+   mode: 0644
+   owner: root
+   group: root
+
+- name: Install the latest version of Docker Engine
+  yum:
+   name:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+  notify: "restart docker"

@@ -55,10 +55,6 @@
   user:
     name: "{{ username }}"
     comment: user
-    # this is optional
-    # but conflicts with some cloud images
-    # eg ovh, digitalocean has debian users with uid 1000
-    # uid: "{{ uid }}"
     groups: docker
     append: 'yes'
     state: present

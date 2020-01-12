@@ -2,5 +2,10 @@
 - name: restart docker
   service:
     name: docker
-    state: restarted
-    enabled: 'yes'
+    state: "{{ docker_service_status }}"
+    enabled: "{{ docker_service_enabled }}"
+
+- name: yum-clean-metadata
+  command: yum clean metadata
+  args:
+    warn: 'no'
