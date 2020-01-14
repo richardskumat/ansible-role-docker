@@ -28,13 +28,13 @@ before_script:
 test_d9:
   stage: test
   variables:
-    MOLECULE_DISTRO: "debian:stretch-backports"
+    MOLECULE_DISTRO: "qwe1/docker-centos:9-molecule"
   script:
     - molecule test
 
 test_d10:
   stage: test
   variables:
-    MOLECULE_DISTRO: "debian:buster-backports"
+    MOLECULE_DISTRO: "qwe1/docker-centos:10-molecule"
   script:
     - molecule test
