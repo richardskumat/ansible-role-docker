@@ -62,10 +62,3 @@
     groups: docker
     append: 'yes'
     state: present
-
-- name: Install backported docker compose
-  apt:
-    name:
-      - docker-compose
-    update_cache: 'yes'
-    default_release: "{{ ansible_distribution_release }}-backports"
