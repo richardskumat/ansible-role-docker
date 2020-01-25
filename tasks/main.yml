@@ -24,3 +24,8 @@
 - name: Install Docker on Raspbian
   include_tasks: "{{ ansible_lsb.id }}.yml"
   when: ansible_lsb.id == 'Raspbian'
+
+- name: Configure docker users
+  include_tasks: docker-users.yml
+  when:
+    - configure_docker_users == 'true'

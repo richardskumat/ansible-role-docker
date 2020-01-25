@@ -27,8 +27,8 @@ provisioner:
   inventory:
     group_vars:
       docker:
-        user: qwe
-        username: qwe
+        add_docker_users: []
+        remove_docker_users: []
   lint:
     name: ansible-lint
 scenario:

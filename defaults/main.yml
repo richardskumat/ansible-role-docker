@@ -1,9 +1,14 @@
 ---
-docker_remote_ip: "{{ ansible_default_ipv4.address }}"
-docker_remote_port: 2375
-username: qwe
-
 docker_service_state: 'started'
 docker_service_enabled: 'yes'
 
 docker_centos_repo_baseurl: 'https://download.docker.com/linux/centos/docker-ce.repo'
+
+# set this either to true or false
+# default value: 'false'
+configure_docker_users: 'false'
+
+# list of docker users to add
+add_docker_users: []
+# list of docker users to remove
+remove_docker_users: []
