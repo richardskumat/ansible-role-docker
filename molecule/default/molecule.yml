@@ -12,8 +12,10 @@ platforms:
     image: "${MOLECULE_DISTRO:-qwe1/docker-centos:7-molecule}"
     privileged: true
     pre_build_image: true
-    # command: "/usr/sbin/init"
-    command: ''
+    # set command to "" so molecule test
+    # works with systemd set as cmd in images used
+    # sadly doesn't work with official images
+    command: ""
     pull: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
