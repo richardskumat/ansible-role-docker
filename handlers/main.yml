@@ -1,5 +1,5 @@
 ---
-- name: restart docker
+- name: configure docker service
   service:
     name: docker
     state: "{{ docker_service_state }}"

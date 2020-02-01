@@ -29,4 +29,4 @@
     - docker-ce
     - docker-ce-cli
     - containerd.io
-  notify: "restart docker"
+  notify: "configure docker service"

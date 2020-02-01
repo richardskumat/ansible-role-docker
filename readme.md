@@ -1,52 +1,114 @@
 ansible-role-docker
 =========
 
-Installs docker-ce on Debian 9 and 10 hosts. Also includes a tasks file for Raspbian,
-however I've only tested this role with Raspbian Stretch.
+Installs Docker-ce on Debian 9, 10 and CentOS 7 hosts. Also includes a tasks file for Raspbian,
+however I've only tested this role with Raspbian Stretch and Buster.
 
 Requirements
 ------------
 
-I run the latest ansible, hence I recommend using:
+This was tested with:
 
-ansible > 2.8
+ansible > 2.9
 
 Role Variables
 --------------
 
 ```
-docker_remote_ip: "{{ ansible_default_ipv4.address }}"
+docker_service_state: 'started'
+docker_service_enabled: 'yes'
+```
 
-Unused var at the moment, but there commented out tasks that would
-set up remote access to the docker daemon in the Debian tasks,
-but since I don't use docker over http/s these are commented out.
+What the state of the docker service should be.
 
-docker_remote_port: 2375
+These values define the state of the docker service
+handler task in handlers/main.yml.
 
-See above, unused at this time.
+```
+docker_centos_repo_baseurl: 'https://download.docker.com/linux/centos/docker-ce.repo'
+```
 
-username: qwe
+Repo url to download the repo file from.
 
-The username for the user that gets added to the docker group.
-This value is the username I use on my own devices.
+```
+configure_docker_users: 'false'
+```
 
+Configure this role whether to add/remove users
+from the docker group. By default, this role
+doesn't touch users/group memberships.
+
+When set to true, the role runs docker-users.yml
+from tasks.
+
+```
+docker_group_name: 'docker'
+```
+
+The group name of the group that has write
+access to the docker socket.
+
+Default value is docker.
+
+See the [docker post-installation docs](https://docs.docker.com/install/linux/linux-postinstall/) for
+more details
+
+```
+add_docker_users: []
+```
+
+The list of users to add to the docker group.
+
+Default value is blank.
+
+Example values:
+
+```yaml
+add_docker_users: [
+    - john
+    - wick
+]
+```
+
+```
+remove_docker_users: []
+```
+
+The list of users to be removed from the docker group.
+
+This value is used a command task(gpasswd -d user group),
+so it's not perfect by any means.
+
+Default value is blank.
+
+Example values:
+
+```yaml
+remove_docker_users: [
+    - john
+    - wick
+]
 ```
 
 Dependencies
 ------------
 
-None.
+The following packages are required on Debian
+based distributions:
+
+lsb-release
 
 Example Playbook
 ----------------
 
 
-```
+```yaml
 ---
 - name: Install docker-ce
   hosts: all
+  become: 'true'
   roles:
-    - role: richardskumat.ansible-role-docker
+    - role: richardskumat.ansible_role_docker
 
 ```
 

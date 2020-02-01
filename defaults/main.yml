@@ -8,6 +8,8 @@ docker_centos_repo_baseurl: 'https://download.docker.com/linux/centos/docker-ce.
 # default value: 'false'
 configure_docker_users: 'false'
 
+docker_group_name: 'docker'
+
 # list of docker users to add
 add_docker_users: []
 # list of docker users to remove

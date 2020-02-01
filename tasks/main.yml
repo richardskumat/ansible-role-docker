@@ -6,6 +6,11 @@
     - ansible_distribution == 'CentOS'
     - ansible_distribution_major_version == "7"
 
+- name: Update apt cache and add lsb-release to Debian based systems.
+  apt:
+    update_cache: 'yes'
+    name: lsb-release
+  when: ansible_os_family == 'Debian'
 
 - name: Include tasks specific to Debian 9.
   include_tasks: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"

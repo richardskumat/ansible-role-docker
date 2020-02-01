@@ -1,6 +1,14 @@
 ---
 - name: Converge
   hosts: all
+  become: 'true'
+
+  pre_tasks:
+    - name: Update apt cache and add lsb-release.
+      apt:
+        update_cache: 'yes'
+        name: lsb-release
+      when: ansible_os_family == 'Debian'
 
   roles:
     - role: richardskumat.ansible_role_docker

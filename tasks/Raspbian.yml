@@ -48,5 +48,5 @@
       - python-docker
     update_cache: 'yes'
     install_recommends: 'no'
-  notify: "restart docker"
+  notify: "configure docker service"
   when: ansible_lsb.id == 'Raspbian'

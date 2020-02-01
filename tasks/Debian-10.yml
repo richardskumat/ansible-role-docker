@@ -11,7 +11,7 @@
 - name: Update apt
   apt:
     update_cache: 'yes'
-    upgrade: dist
+    upgrade: safe
 
 - name: Install needed packages for Docker
   apt:
@@ -47,4 +47,4 @@
       - containerd.io
     update_cache: 'yes'
     install_recommends: 'no'
-  notify: "restart docker"
+  notify: "configure docker service"

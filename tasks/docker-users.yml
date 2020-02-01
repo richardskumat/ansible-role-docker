@@ -5,7 +5,7 @@
 - name: Adding docker users if configured
   user:
     name: "{{ item }}"
-    groups: docker
+    groups: "{{ docker_group_name }}"
     append: 'yes'
     state: present
   with_items:
@@ -13,7 +13,7 @@
   when: add_docker_users | length > 0
 
 - name: Removing docker users if configured
-  command: gpasswd -d "{{ item }}" docker
+  command: gpasswd -d "{{ item }}" "{{ docker_group_name }}"
   register: removal_result
   changed_when: "removal_result.rc != 0"
   with_items:
