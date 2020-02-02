@@ -21,3 +21,6 @@
   with_items:
     - "{{ remove_docker_users }}"
   when: remove_docker_users | length > 0
+  # don't stop the task if a specified user is no longer in the docker group
+  # or never was
+  ignore_errors: yes
