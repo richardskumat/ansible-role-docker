@@ -1,6 +1,6 @@
 ---
-- name: restart docker
+- name: configure docker service
   service:
     name: docker
-    state: restarted
-    enabled: 'yes'
+    state: "{{ docker_service_state }}"
+    enabled: "{{ docker_service_enabled }}"

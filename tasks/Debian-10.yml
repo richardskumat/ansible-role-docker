@@ -11,7 +11,7 @@
 - name: Update apt
   apt:
     update_cache: 'yes'
-    upgrade: dist
+    upgrade: safe
 
 - name: Install needed packages for Docker
   apt:
@@ -45,20 +45,6 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
-      # python docker is req for ansible for mod ansible_docker
-      - python-docker
     update_cache: 'yes'
     install_recommends: 'no'
-  notify: "restart docker"
-
-- name: Add my user to docker
-  user:
-    name: "{{ username }}"
-    comment: user
-    # this is optional
-    # but conflicts with some cloud images
-    # eg ovh, digitalocean has debian users with uid 1000
-    # uid: "{{ uid }}"
-    groups: docker
-    append: 'yes'
-    state: present
+  notify: "configure docker service"
