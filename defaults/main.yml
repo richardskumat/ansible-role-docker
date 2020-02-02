@@ -14,3 +14,10 @@ docker_group_name: 'docker'
 add_docker_users: []
 # list of docker users to remove
 remove_docker_users: []
+
+# whether to run the uninstallation tasks
+# values are:
+# 'true' or 'false'
+# default value:
+# 'false'
+remove_docker_packages: 'false'

@@ -5,12 +5,15 @@
   when:
     - ansible_distribution == 'CentOS'
     - ansible_distribution_major_version == "7"
+    - not remove_docker_packages == 'true'
 
 - name: Update apt cache and add lsb-release to Debian based systems.
   apt:
     update_cache: 'yes'
     name: lsb-release
-  when: ansible_os_family == 'Debian'
+  when:
+    - ansible_os_family == 'Debian'
+    - not remove_docker_packages == 'true'
 
 - name: Include tasks specific to Debian 9.
   include_tasks: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
@@ -18,6 +21,7 @@
     - ansible_distribution == 'Debian'
     - ansible_distribution_major_version == "9"
     - not ansible_lsb.id == 'Raspbian'
+    - not remove_docker_packages == 'true'
 
 - name: Include tasks specific to Debian 10.
   include_tasks: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
@@ -25,12 +29,21 @@
     - ansible_distribution == 'Debian'
     - ansible_distribution_major_version == "10"
     - not ansible_lsb.id == 'Raspbian'
+    - not remove_docker_packages == 'true'
 
 - name: Install Docker on Raspbian
   include_tasks: "{{ ansible_lsb.id }}.yml"
-  when: ansible_lsb.id == 'Raspbian'
+  when:
+    - ansible_lsb.id == 'Raspbian'
+    - not remove_docker_packages == 'true'
 
 - name: Configure docker users
   include_tasks: docker-users.yml
   when:
     - configure_docker_users == 'true'
+    - not remove_docker_packages == 'true'
+
+- name: Remove docker packages
+  include_tasks: remove-docker.yml
+  when:
+    - remove_docker_packages == 'true'

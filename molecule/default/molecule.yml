@@ -29,6 +29,7 @@ provisioner:
       docker:
         add_docker_users: []
         remove_docker_users: []
+        remove_docker_packages: 'false'
   lint:
     name: ansible-lint
 scenario:

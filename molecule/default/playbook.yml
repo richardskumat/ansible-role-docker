@@ -8,7 +8,9 @@
       apt:
         update_cache: 'yes'
         name: lsb-release
-      when: ansible_os_family == 'Debian'
+      when:
+        - ansible_os_family == 'Debian'
+        - not remove_docker_packages == 'true'
 
   roles:
     - role: richardskumat.ansible_role_docker

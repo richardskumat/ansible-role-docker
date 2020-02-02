@@ -90,6 +90,21 @@ remove_docker_users: [
 ]
 ```
 
+```yaml
+remove_docker_packages: 'false'
+```
+
+Whether to run the uninstallation task to remove packages
+installed by docker.
+
+Accepted values:
+
+'true' or 'false'
+
+Default value:
+
+'false'
+
 Dependencies
 ------------
 
@@ -97,6 +112,9 @@ The following packages are required on Debian
 based distributions:
 
 lsb-release
+
+This role will attempt to install lsb-release as
+a dependency.
 
 Example Playbook
 ----------------
