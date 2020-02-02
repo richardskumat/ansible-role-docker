@@ -13,6 +13,8 @@
   when: add_docker_users | length > 0
 
 - name: Removing docker users if configured
+  # use gpasswd -d as a workaround for https://github.com/ansible/ansible/issues/11024
+  # as mentioned in https://stackoverflow.com/questions/38988986/how-to-remove-user-from-a-specified-group-in-ansible
   command: gpasswd -d "{{ item }}" "{{ docker_group_name }}"
   register: removal_result
   changed_when: "removal_result.rc != 0"
