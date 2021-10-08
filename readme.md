@@ -1,7 +1,7 @@
 ansible-role-docker
 =========
 
-Installs Docker-ce on Debian 9, 10 and CentOS 7 hosts. Also includes a tasks file for Raspbian,
+Installs Docker-ce on Debian 9 and 10. Also includes a tasks file for Raspbian,
 however I've only tested this role with Raspbian Stretch and Buster.
 
 Requirements

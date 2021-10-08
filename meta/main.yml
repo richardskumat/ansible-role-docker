@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: richardskumat
-  description: ansible docker role for Debian and CentOS
+  description: ansible docker role for Debian
   company: none
 
   issue_tracker_url: https://gitlab.com/richardskumat/ansible-role-docker/issues
@@ -13,9 +13,6 @@ galaxy_info:
       versions:
         - 9
         - 10
-    - name: EL
-      versions:
-        - 7
 
   galaxy_tags:
     - debian
