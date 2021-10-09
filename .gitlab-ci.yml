@@ -10,7 +10,7 @@ variables:
 
 
 services:
-  - docker:20.10
+  - docker:20.10-dind
 
 stages:
   - test
