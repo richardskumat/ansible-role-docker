@@ -9,7 +9,7 @@
     - not remove_docker_packages == 'true'
 
 - name: Include tasks specific to Debian.
-  include_tasks: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+  include_tasks: "{{ ansible_distribution }}.yml"
   when:
     - ansible_distribution == 'Debian'
     - not ansible_lsb.id == 'Raspbian'
