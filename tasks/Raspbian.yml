@@ -45,7 +45,7 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
-      - python-docker
+      - python3-docker
     update_cache: 'yes'
     install_recommends: 'no'
   notify: "configure docker service"

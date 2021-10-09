@@ -2,31 +2,6 @@
 # to be fair this task file doesn't
 # remove the docker group, or any users from it
 
-- name: Remove all packages called docker from Red Hat systems
-  yum:
-   name:
-    - docker
-    - docker-client
-    - docker-client-latest
-    - docker-common
-    - docker-latest
-    - docker-latest-logrotate
-    - docker-logrotate
-    - docker-engine
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
-   state: absent
-  when:
-   - ansible_os_family == 'RedHat'
-
-- name: Remove the docker-ce repo from Red Hat systems
-  file:
-   path: /etc/yum.repos.d/docker-ce.repo
-   state: absent
-  when:
-   - ansible_os_family == 'RedHat'
-
 - name: Remove docker packages from Debian systems
   apt:
    name:
