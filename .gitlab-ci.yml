@@ -23,7 +23,7 @@ before_script:
   - cp -aR $ROLE_NAME $GALAXY_USERNAME.$GALAXY_ROLENAME
   - cd $GALAXY_USERNAME.$GALAXY_ROLENAME
   # https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva/1083451#1083451
-  - cat /sys/fs/cgroup/cgroup.controllers
+  # - cat /sys/fs/cgroup/cgroup.controllers
 
 test_d11:
   stage: test
