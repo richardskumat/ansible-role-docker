@@ -15,7 +15,7 @@ platforms:
     command: ""
     pull: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup
 provisioner:
   name: ansible
   log: true
