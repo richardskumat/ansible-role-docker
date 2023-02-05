@@ -47,4 +47,4 @@
       - containerd.io
     update_cache: 'yes'
     install_recommends: 'no'
-  notify: "configure docker service"
+  notify: "Configure docker service"

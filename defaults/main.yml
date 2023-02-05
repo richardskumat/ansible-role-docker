@@ -4,14 +4,33 @@ docker_service_enabled: 'yes'
 
 # set this either to true or false
 # default value: 'false'
-configure_docker_users: 'false'
+configure_docker_users: 'true'
 
 docker_group_name: 'docker'
 
 # list of docker users to add
-add_docker_users: []
+add_docker_users: [
+  'steve',
+  'joe',
+]
+
+# eg
+# add_docker_users: [
+#  'steve',
+#  'joe',
+# ]
+
 # list of docker users to remove
-remove_docker_users: []
+remove_docker_users: [
+  'bill',
+  'jack',
+]
+
+# eg
+# remove_docker_users: [
+#  'bill',
+#  'jack',
+# ]
 
 # whether to run the uninstallation tasks
 # values are:

@@ -1,5 +1,5 @@
 ---
-- name: configure docker service
+- name: Configure docker service
   service:
     name: docker
     state: "{{ docker_service_state }}"
