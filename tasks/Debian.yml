@@ -1,6 +1,6 @@
 ---
 - name: Remove older versions of Docker(including those in main debian repos)
-  apt:
+  ansible.builtin.apt:
     name:
       - docker-engine
       - docker.io
@@ -9,12 +9,12 @@
     state: absent
 
 - name: Update apt
-  apt:
+  ansible.builtin.apt:
     update_cache: 'yes'
     upgrade: safe
 
 - name: Install needed packages for Docker
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - ca-certificates
@@ -24,13 +24,13 @@
     install_recommends: 'no'
 
 - name: Add docker's apt key
-  apt_key:
+  ansible.builtin.apt_key:
     url: 'https://download.docker.com/linux/debian/gpg'
     state: present
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
 
 - name: Setup the docker apt repo
-  lineinfile:
+  ansible.builtin.lineinfile:
     line: 'deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable'
     path: /etc/apt/sources.list.d/docker-ce.list
     create: 'yes'
@@ -40,7 +40,7 @@
     state: present
 
 - name: Install docker packages
-  apt:
+  ansible.builtin.apt:
     name:
       - docker-ce
       - docker-ce-cli

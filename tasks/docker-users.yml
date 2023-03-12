@@ -3,7 +3,7 @@
 # the docker group
 
 - name: Adding docker users if configured
-  user:
+  ansible.builtin.user:
     name: "{{ item }}"
     groups: "{{ docker_group_name }}"
     append: 'yes'
@@ -16,7 +16,7 @@
   # use gpasswd -d as a workaround for https://github.com/ansible/ansible/issues/11024
   # as mentioned in https://stackoverflow.com/questions/38988986/how-to-remove-user-from-a-specified-group-in-ansible
   # idempotence tests fail in molecule test if the same users get added and removed in the same run
-  command: gpasswd -d "{{ item }}" "{{ docker_group_name }}"
+  ansible.builtin.command: gpasswd -d "{{ item }}" "{{ docker_group_name }}"
   register: command_result
   changed_when: "not 'is not a member of' in command_result.stderr"
   failed_when: "'does not exist in /etc/group' in command_result.stderr"
