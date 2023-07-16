@@ -44,7 +44,9 @@
     name:
       - docker-ce
       - docker-ce-cli
+      - docker-buildx-plugin
       - containerd.io
+      - python3-docker
     update_cache: 'yes'
     install_recommends: 'no'
   notify: "Configure docker service"
