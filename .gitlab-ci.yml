@@ -10,7 +10,7 @@ variables:
 
 
 services:
-  - docker:23.0-dind
+  - docker:24.0-dind
 
 stages:
   - test
