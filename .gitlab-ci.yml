@@ -13,6 +13,7 @@ services:
   - docker:24.0-dind
 
 stages:
+  - lint
   - test
 
 before_script:
@@ -22,8 +23,11 @@ before_script:
   - cd ..
   - cp -aR $ROLE_NAME $GALAXY_USERNAME.$GALAXY_ROLENAME
   - cd $GALAXY_USERNAME.$GALAXY_ROLENAME
-  # https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva/1083451#1083451
-  # - cat /sys/fs/cgroup/cgroup.controllers
+
+lint:
+  stage: lint
+  script:
+    - ansible-lint
 
 test_d11:
   stage: test
@@ -31,3 +35,10 @@ test_d11:
     MOLECULE_DISTRO: "qwe1/docker-debian:11-molecule"
   script:
     - molecule --debug test
+
+test_d12:
+  stage: test
+  variables:
+    MOLECULE_DISTRO: "qwe1/docker-debian:12-molecule"
+  script:
+    - molecule test
